@@ -1,4 +1,5 @@
-import deg2rad from './three/deg2rad'
+import degToRad from './three/degToRad'
 import CameraHelper from './three/CameraHelper'
+import CameraControls from './three/CameraControls'
 
-export { deg2rad, CameraHelper }
+export { degToRad, CameraHelper, CameraControls }

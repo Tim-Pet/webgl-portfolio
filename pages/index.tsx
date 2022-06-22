@@ -1,18 +1,23 @@
-import { Camera, Canvas } from '@react-three/fiber'
+import { Canvas } from '@react-three/fiber'
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { Euler, Vector3 } from 'three'
+import { Vector3 } from 'three'
 import Box from '../components/box'
 import Scene from '../components/Scene'
-import { CameraHelper, deg2rad } from '../helper'
 
 const Home: NextPage = () => {
+  const isWindowLoaded = typeof window !== 'undefined'
   const cameraOptions = {
     frustumCulled: false,
-    position: new Vector3(0, 0, 10),
+    position: new Vector3(0, 0, 1),
     fov: 70,
-    near: 1,
+    near: 0.01,
     far: 10,
+    aspectRatio: () => {
+      if (isWindowLoaded) {
+        return window.innerWidth / window.innerHeight
+      }
+    },
   }
 
   return (
@@ -29,15 +34,13 @@ const Home: NextPage = () => {
       <main>
         <script src="js/three.js"></script>
         <div className="h-screen w-screen">
-          <Canvas camera={cameraOptions}>
+          <Canvas
+            camera={cameraOptions}
+            gl={{ antialias: true }}
+            dpr={isWindowLoaded ? window.devicePixelRatio : 1}
+          >
             <Scene>
               <Box position={[0, 0, 0]} />
-              <CameraHelper
-                position={new Vector3(3, 0, 3)}
-                rotation={new Euler(0, deg2rad(90), 0)}
-                near={1}
-                far={5}
-              />
             </Scene>
           </Canvas>
         </div>
