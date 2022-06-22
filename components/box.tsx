@@ -15,6 +15,7 @@ export default function Box(props: any) {
       mesh.current.rotation.y += 0.01
     }
   })
+
   // Return view, these are regular three.js elements expressed in JSX
   return (
     <mesh
@@ -26,7 +27,7 @@ export default function Box(props: any) {
       onPointerOut={(event) => setHover(false)}
     >
       <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+      <meshBasicMaterial color={hovered ? 'hotpink' : 'orange'} />
     </mesh>
   )
 }

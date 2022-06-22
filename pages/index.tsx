@@ -4,6 +4,7 @@ import Head from 'next/head'
 import { Vector3 } from 'three'
 import Box from '../components/box'
 import Scene from '../components/Scene'
+import ShaderBox from '../components/ShaderPlane'
 
 const Home: NextPage = () => {
   const isWindowLoaded = typeof window !== 'undefined'
@@ -33,14 +34,15 @@ const Home: NextPage = () => {
 
       <main>
         <script src="js/three.js"></script>
-        <div className="h-screen w-screen">
+        <div className="h-screen w-screen bg-slate-500">
           <Canvas
             camera={cameraOptions}
             gl={{ antialias: true }}
             dpr={isWindowLoaded ? window.devicePixelRatio : 1}
           >
             <Scene>
-              <Box position={[0, 0, 0]} />
+              {/* <Box position={[0, 0, 0]} /> */}
+              <ShaderBox />
             </Scene>
           </Canvas>
         </div>
