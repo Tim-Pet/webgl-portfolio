@@ -9,9 +9,10 @@ export default function Box(props: any) {
   const [hovered, setHover] = useState(false)
   const [active, setActive] = useState(false)
   // Subscribe this component to the render-loop, rotate the mesh every frame
-  useFrame((state, delta) => {
+  useFrame(({ clock }) => {
+    // console.log(clock.elapsedTime)
     if (mesh.current) {
-      mesh.current.rotation.x += 0.01
+      mesh.current.rotation.y += 0.01
     }
   })
   // Return view, these are regular three.js elements expressed in JSX

@@ -6,10 +6,6 @@ type Props = GroupProps & {
 }
 
 const Scene = ({ children, ...props }: Props) => {
-  useThree(({ camera }) => {
-    camera.rotation.set(0, 0, 0)
-  })
-
   return (
     <>
       <ambientLight />
