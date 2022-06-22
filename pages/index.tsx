@@ -2,6 +2,7 @@ import { Canvas } from '@react-three/fiber'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Box from '../components/box'
+import Scene from '../components/Scene'
 
 const Home: NextPage = () => {
   return (
@@ -19,10 +20,10 @@ const Home: NextPage = () => {
         <script src="js/three.js"></script>
         <div className="h-screen w-screen">
           <Canvas>
-            <ambientLight />
-            <pointLight position={[10, 10, 10]} />
-            <Box position={[-1.2, 0, 0]} />
-            <Box position={[2.2, 0, 0]} />
+            <Scene>
+              <Box position={[-1.2, 0, 0]} />
+              <Box position={[2.2, 0, 0]} />
+            </Scene>
           </Canvas>
         </div>
       </main>
