@@ -1,4 +1,13 @@
+uniform float time;
+varying float vPulse;
+
+varying vec2 vUv;
+
 void main() {
-    gl_Position = projectionMatrix *
-    modelViewMatrix * vec4( position, 1.0 );
+    vUv = uv;
+    vec3 newPosition = position;
+    newPosition.z = 0.1 * sin(length(position) * 20. + time);
+    vPulse = 15. * newPosition.z;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+    
 }
