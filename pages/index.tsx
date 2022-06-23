@@ -4,7 +4,7 @@ import Head from 'next/head'
 import { Vector3 } from 'three'
 import Box from '../components/box'
 import Scene from '../components/Scene'
-import ShaderBox from '../components/ShaderPlane'
+import ShaderBox from '../components/ShaderSphere'
 
 const Home: NextPage = () => {
   const isWindowLoaded = typeof window !== 'undefined'

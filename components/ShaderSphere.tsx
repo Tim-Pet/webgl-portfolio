@@ -1,12 +1,12 @@
 import React, { useMemo, useRef, useState } from 'react'
 import { useFrame, useLoader } from '@react-three/fiber'
-import { Mesh, TextureLoader, Vector2 } from 'three'
-import fragmentShader from './shaders/fragment.glsl'
-import vertexShader from './shaders/vertex.glsl'
+import { Mesh, SphereBufferGeometry, TextureLoader, Vector2 } from 'three'
+import sphereFragmentShader from './shaders/sphereFragment.glsl'
+import sphereVertexShader from './shaders/sphereVertex.glsl'
 import testTexture from '../assets/textures/metal_texture.webp'
 console.log(testTexture)
 
-const ShaderPlane = (props: any) => {
+const ShaderSphere = (props: any) => {
   // This reference will give us direct access to the mesh
   const mesh = useRef<Mesh>()
 
@@ -17,8 +17,8 @@ const ShaderPlane = (props: any) => {
         uTexture: { value: useLoader(TextureLoader, testTexture.src) },
         resolution: { value: new Vector2() },
       },
-      fragmentShader,
-      vertexShader,
+      fragmentShader: sphereFragmentShader,
+      vertexShader: sphereVertexShader,
     }),
     []
   )
@@ -31,10 +31,10 @@ const ShaderPlane = (props: any) => {
   // Return view, these are regular three.js elements expressed in JSX
   return (
     <mesh {...props} ref={mesh}>
-      <planeBufferGeometry args={[0.5, 0.5, 100, 100]} />
-      <shaderMaterial {...shaderData} wireframe={true} />
+      <sphereBufferGeometry args={[0.5, 1000, 1000]} />
+      <shaderMaterial {...shaderData} />
     </mesh>
   )
 }
 
-export default ShaderPlane
+export default ShaderSphere
