@@ -1,10 +1,11 @@
 import React, { useMemo, useRef } from 'react'
 import { useFrame, useLoader, useThree } from '@react-three/fiber'
-import { Mesh, TextureLoader, Vector2 } from 'three'
+import { Mesh, TextureLoader, Vector2, Vector4 } from 'three'
+import { useControls } from 'leva'
+import gsap from 'gsap'
 import planeFragmentShader from './shaders/plane/planeFragment.glsl'
 import planeVertexShader from './shaders/plane/planeVertex.glsl'
 import testTexture from '../assets/textures/numbers_texture.jpg'
-import { useControls } from 'leva'
 
 const ShaderPlane = (props: any) => {
   const mesh = useRef<Mesh>()
@@ -28,6 +29,7 @@ const ShaderPlane = (props: any) => {
         uProgress: { value: progress },
         uTexture: { value: useLoader(TextureLoader, testTexture.src) },
         uTextureSize: { value: new Vector2(100, 100) },
+        uCorners: { value: new Vector4(0, 0, 0, 0) },
         uResolution: { value: new Vector2(width, height) },
         uQuadSize: { value: new Vector2(300, 300) },
       },
@@ -36,9 +38,19 @@ const ShaderPlane = (props: any) => {
     }
   }, [viewport])
 
+  const tl = useMemo(() => {
+    return gsap
+      .timeline()
+      .to(shaderData.uniforms.uCorners.value, { x: 1, duration: 1 }, 0.0)
+      .to(shaderData.uniforms.uCorners.value, { y: 1, duration: 1 }, 0.1)
+      .to(shaderData.uniforms.uCorners.value, { z: 1, duration: 1 }, 0.2)
+      .to(shaderData.uniforms.uCorners.value, { w: 1, duration: 1 }, 0.3)
+  }, [])
+
   useFrame(({ clock }) => {
     shaderData.uniforms.time.value = clock.elapsedTime * 3
-    shaderData.uniforms.uProgress.value = progress
+    tl.progress(progress)
+
     if (mesh.current) {
       mesh.current.position.x = 300
       mesh.current.rotation.z = 0.5
