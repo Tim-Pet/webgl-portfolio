@@ -9,6 +9,7 @@ import Box from '../components/box'
 import ShaderSphere from '../components/ShaderSphere'
 import ShaderPlane from '../components/ShaderPlane'
 import { useControls } from 'leva'
+import DnaPlane from '../components/DnaPlane'
 
 const isWindowLoaded = typeof window !== 'undefined'
 const Home: NextPage = () => {
@@ -16,7 +17,7 @@ const Home: NextPage = () => {
 
   // camera setup
   const [cameraFov, setCameraFov] = useState<number>(0)
-  const cameraDistance = 10
+  const cameraDistance = 1000
   useEffect(() => {
     const height = containerRef.current?.clientHeight || 0
     const fov = 2 * radToDeg(Math.atan(height / 2 / cameraDistance))
@@ -61,6 +62,7 @@ const Home: NextPage = () => {
               {/* <Box position={[0, 0, 0]} /> */}
               {/* <ShaderSphere /> */}
               <ShaderPlane />
+              {/* <DnaPlane /> */}
             </Scene>
           </Canvas>
         </div>
