@@ -17,8 +17,8 @@ vec2 getUV(vec2 uv, vec2 textureSize, vec2 quadSize) {
 
   vec2 tmpUV = uv - vec2(0.5);
 
-  float textureAspect = textureSize.x / textureSize.y;
   float quadAspect = quadSize.x / quadSize.y;
+  float textureAspect = textureSize.x / textureSize.y;
 
   if (quadAspect < textureAspect) {
     tmpUV = tmpUV * vec2(quadAspect / textureAspect, 1.0);

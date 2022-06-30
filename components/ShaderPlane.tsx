@@ -49,11 +49,11 @@ const ShaderPlane = (props: any) => {
 
   useFrame(({ clock }) => {
     shaderData.uniforms.time.value = clock.elapsedTime * 3
-    tl.progress(progress)
+    shaderData.uniforms.uProgress.value = progress
+    // tl.progress(progress)
 
     if (mesh.current) {
       mesh.current.position.x = 300
-      mesh.current.rotation.z = 0.5
     }
   })
 
