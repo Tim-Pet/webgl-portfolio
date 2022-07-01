@@ -3,9 +3,9 @@ import { useFrame, useLoader, useThree } from '@react-three/fiber'
 import { Mesh, TextureLoader, Vector2, Vector4 } from 'three'
 import { useControls } from 'leva'
 import gsap from 'gsap'
-import planeFragmentShader from './shaders/plane/planeFragment.glsl'
-import planeVertexShader from './shaders/plane/planeVertex.glsl'
-import testTexture from '../assets/textures/numbers_texture.jpg'
+import planeFragmentShader from '../shaders/plane/planeFragment.glsl'
+import planeVertexShader from '../shaders/plane/planeVertex.glsl'
+import testTexture from '../../assets/textures/numbers_texture.jpg'
 
 const ShaderPlane = (props: any) => {
   const mesh = useRef<Mesh>()

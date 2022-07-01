@@ -1,8 +1,8 @@
 import React, { useMemo, useRef } from 'react'
-import { useFrame, useLoader } from '@react-three/fiber'
-import { Mesh, TextureLoader, Vector2 } from 'three'
-import dnaFragmentShader from './shaders/dna/dnaFragment.glsl'
-import dnaVertexShader from './shaders/dna/dnaVertex.glsl'
+import { useFrame } from '@react-three/fiber'
+import { Mesh, Vector2 } from 'three'
+import dnaFragmentShader from '../shaders/dna/dnaFragment.glsl'
+import dnaVertexShader from '../shaders/dna/dnaVertex.glsl'
 import { useControls } from 'leva'
 
 const DnaPlane = (props: any) => {

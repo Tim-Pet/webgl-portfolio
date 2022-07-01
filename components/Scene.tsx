@@ -1,26 +1,48 @@
-import React from 'react'
-import { GroupProps } from '@react-three/fiber'
-import { Euler, Vector3 } from 'three'
-import { CameraControls, CameraHelper, degToRad } from '../helper'
+import { Canvas } from '@react-three/fiber'
+import { useEffect, useRef, useState } from 'react'
+import { Vector3 } from 'three'
+import { radToDeg } from 'three/src/math/MathUtils'
+import SceneSetup from '../components/SceneSetup'
+import ShaderPlane from './threeObjects/ShaderPlane'
 
-type Props = GroupProps & {
-  children: any
-}
+const isWindowLoaded = typeof window !== 'undefined'
 
-const Scene = ({ children, ...props }: Props) => {
+const Scene = () => {
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  // camera setup
+  const [cameraFov, setCameraFov] = useState<number>(0)
+  const cameraDistance = 1000
+  useEffect(() => {
+    const height = containerRef.current?.clientHeight || 0
+    const fov = 2 * radToDeg(Math.atan(height / 2 / cameraDistance))
+    setCameraFov(fov)
+  }, [containerRef.current])
+
+  const cameraOptions = {
+    frustumCulled: false,
+    position: new Vector3(0, 0, cameraDistance),
+    fov: cameraFov,
+    near: 0.01,
+    far: 1000,
+    aspectRatio: () => {
+      if (isWindowLoaded) {
+        return window.innerWidth / window.innerHeight
+      }
+    },
+  }
   return (
-    <>
-      <ambientLight />
-      <pointLight position={[10, 10, 10]} />
-      {/* <CameraHelper
-        position={new Vector3(1.5, 0, 0)}
-        rotation={new Euler(0, degToRad(90), 0)}
-        near={1}
-        far={5}
-      /> */}
-      <CameraControls />
-      {children}
-    </>
+    <div className="relative h-screen w-screen bg-slate-500" ref={containerRef}>
+      <Canvas
+        camera={cameraOptions}
+        gl={{ antialias: true }}
+        dpr={isWindowLoaded ? window.devicePixelRatio : 1}
+      >
+        <SceneSetup>
+          <ShaderPlane />
+        </SceneSetup>
+      </Canvas>
+    </div>
   )
 }
 

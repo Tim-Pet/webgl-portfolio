@@ -1,9 +1,9 @@
 import React, { useMemo, useRef } from 'react'
 import { useFrame, useLoader } from '@react-three/fiber'
 import { Mesh, TextureLoader, Vector2 } from 'three'
-import sphereFragmentShader from './shaders/sphere/sphereFragment.glsl'
-import sphereVertexShader from './shaders/sphere/sphereVertex.glsl'
-import testTexture from '../assets/textures/metal_texture.webp'
+import sphereFragmentShader from '../shaders/sphere/sphereFragment.glsl'
+import sphereVertexShader from '../shaders/sphere/sphereVertex.glsl'
+import testTexture from '../../assets/textures/metal_texture.webp'
 
 const ShaderSphere = (props: any) => {
   // This reference will give us direct access to the mesh
